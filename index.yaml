@@ -6,6 +6,34 @@ entries:
         - Use Ingress Controller 1.7.3 version for base image
     apiVersion: v2
     appVersion: 1.7.3
+    created: "2021-12-12T00:24:55.064771763Z"
+    description: A Helm chart for HAProxy Kubernetes Ingress Controller
+    digest: f61f1df502a9138bdd17936891b78b4f7a99c4afb4cea5663a5eb7eee60101b3
+    home: https://github.com/haproxytech/helm-charts/tree/main/kubernetes-ingress
+    icon: https://raw.githubusercontent.com/haproxytech/helm-charts/main/kubernetes-ingress/chart-icon.png
+    keywords:
+    - ingress
+    - haproxy
+    kubeVersion: '>=1.17.0-0'
+    maintainers:
+    - email: mmhedhbi@haproxy.com
+      name: Moemen Mhedhbi
+    - email: bassmann@haproxy.com
+      name: Baptiste Assmann
+    - email: dkorunic@haproxy.com
+      name: Dinko Korunic
+    name: kubernetes-ingress
+    sources:
+    - https://github.com/haproxytech/kubernetes-ingress
+    type: application
+    urls:
+    - https://github.com/ocdi/helm-charts/releases/download/kubernetes-ingress-1.17.12/kubernetes-ingress-1.17.12.tgz
+    version: 1.17.12
+  - annotations:
+      artifacthub.io/changes: |
+        - Use Ingress Controller 1.7.3 version for base image
+    apiVersion: v2
+    appVersion: 1.7.3
     created: "2021-12-12T00:22:59.39728248Z"
     description: A Helm chart for HAProxy Kubernetes Ingress Controller
     digest: c3907c363c7b830c33519a63e95a0b12fb039419d3826ce6bb71018182f1b2ce
