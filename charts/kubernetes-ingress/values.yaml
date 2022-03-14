@@ -55,6 +55,10 @@ controller:
   kind: Deployment    # can be 'Deployment' or 'DaemonSet'
   replicaCount: 2
 
+  ## minReadySeconds setting of Deployment or DaemonSet
+  ## ref: https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#min-ready-seconds
+  minReadySeconds: 0
+
   ## Running container without root privileges
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
   unprivileged: false
@@ -93,37 +97,37 @@ controller:
   ## Controller Container liveness/readiness probe configuration
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
   livenessProbe:
-    enabled: true
     failureThreshold: 3
     initialDelaySeconds: 0
-    path: /healthz
     periodSeconds: 10
-    port: 1042
-    scheme: HTTP
     successThreshold: 1
     timeoutSeconds: 1
+    httpGet:
+      path: /healthz
+      port: 1042
+      scheme: HTTP
 
   readinessProbe:
-    enabled: true
     failureThreshold: 3
     initialDelaySeconds: 0
-    path: /healthz
     periodSeconds: 10
-    port: 1042
-    scheme: HTTP
     successThreshold: 1
     timeoutSeconds: 1
+    httpGet:
+      path: /healthz
+      port: 1042
+      scheme: HTTP
 
   startupProbe:
-    enabled: true
     failureThreshold: 20
     initialDelaySeconds: 0
-    path: /healthz
     periodSeconds: 1
-    port: 1042
-    scheme: HTTP
     successThreshold: 1
     timeoutSeconds: 1
+    httpGet:
+      path: /healthz
+      port: 1042
+      scheme: HTTP
 
   ## IngressClass:
   ## Ref: https://github.com/haproxytech/kubernetes-ingress/blob/master/documentation/ingressclass.md
@@ -185,6 +189,11 @@ controller:
     maxReplicas: 20
     targetCPUUtilizationPercentage: 80
     # targetMemoryUtilizationPercentage: 80
+
+    ## HPA annotations
+    ## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
+    annotations: {}
+    #  annotationKey: value
 
     ## Custom metrics (example)
     ## ref: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/#autoscaling-on-multiple-metrics-and-custom-metrics
@@ -315,7 +324,7 @@ controller:
   service:
     enabled: true     # set to false when controller.kind is 'DaemonSet' and controller.daemonset.useHostPorts is true
 
-    type: NodePort    # can be 'NodePort' or 'LoadBalancer'
+    type: NodePort    # can be 'ClusterIP', 'NodePort' or 'LoadBalancer'
 
     ## Service annotations
     ## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
@@ -508,6 +517,11 @@ defaultBackend:
     maxReplicas: 2
     targetCPUUtilizationPercentage: 80
     # targetMemoryUtilizationPercentage: 80
+
+    ## HPA annotations
+    ## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
+    annotations: {}
+    #  annotationKey: value
 
     ## Custom metrics (example)
     ## ref: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/#autoscaling-on-multiple-metrics-and-custom-metrics
