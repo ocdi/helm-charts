@@ -3,6 +3,36 @@ entries:
   kubernetes-ingress:
   - annotations:
       artifacthub.io/changes: |
+        - Use Ingress Controller 1.7.6 version for base image
+        - Fix for invalid servicePath trimming
+        - Add HPA annotations
+    apiVersion: v2
+    appVersion: 1.7.6
+    created: "2022-03-14T09:33:06.971272833Z"
+    description: A Helm chart for HAProxy Kubernetes Ingress Controller
+    digest: e8ac338e39ad7400fe191d08b6b7dc66ab38e29d216760a4362d9e1584b4d959
+    home: https://github.com/haproxytech/helm-charts/tree/main/kubernetes-ingress
+    icon: https://raw.githubusercontent.com/haproxytech/helm-charts/main/kubernetes-ingress/chart-icon.png
+    keywords:
+    - ingress
+    - haproxy
+    kubeVersion: '>=1.17.0-0'
+    maintainers:
+    - email: mmhedhbi@haproxy.com
+      name: Moemen Mhedhbi
+    - email: bassmann@haproxy.com
+      name: Baptiste Assmann
+    - email: dkorunic@haproxy.com
+      name: Dinko Korunic
+    name: kubernetes-ingress
+    sources:
+    - https://github.com/haproxytech/kubernetes-ingress
+    type: application
+    urls:
+    - https://github.com/ocdi/helm-charts/releases/download/kubernetes-ingress-10.20.0/kubernetes-ingress-10.20.0.tgz
+    version: 10.20.0
+  - annotations:
+      artifacthub.io/changes: |
         - Use Ingress Controller 1.7.3 version for base image
     apiVersion: v2
     appVersion: 1.7.3
