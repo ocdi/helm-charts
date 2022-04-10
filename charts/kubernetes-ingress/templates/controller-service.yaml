@@ -67,15 +67,15 @@ spec:
       nodePort: {{ .Values.controller.service.nodePorts.https }}
     {{- end }}
   {{- end }}
-  {{- if .Values.controller.service.enablePorts.stat }}
-    - name: stat
-      port: {{ .Values.controller.service.ports.stat }}
-      protocol: TCP
-      targetPort: {{ .Values.controller.service.targetPorts.stat }}
-    {{- if .Values.controller.service.nodePorts.stat }}
-      nodePort: {{ .Values.controller.service.nodePorts.stat }}
-    {{- end }}
-  {{- end }}
+  # {{- if .Values.controller.service.enablePorts.stat }}
+  #   - name: stat
+  #     port: {{ .Values.controller.service.ports.stat }}
+  #     protocol: TCP
+  #     targetPort: {{ .Values.controller.service.targetPorts.stat }}
+  #   {{- if .Values.controller.service.nodePorts.stat }}
+  #     nodePort: {{ .Values.controller.service.nodePorts.stat }}
+  #   {{- end }}
+  # {{- end }}
   {{- range .Values.controller.service.tcpPorts }}
     - name: {{ .name }}-tcp
       port: {{ .port }}

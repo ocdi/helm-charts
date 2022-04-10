@@ -14,7 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */}}
 
-{{- if .Values.controller.statsService.enabled }}
+{{- if .Values.controller.service.enablePorts.stat }}
 apiVersion: v1
 kind: Service
 metadata:
@@ -26,16 +26,16 @@ metadata:
     app.kubernetes.io/managed-by: {{ .Release.Service }}
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/version: {{ .Chart.AppVersion }}
-{{- if .Values.controller.statsService.labels }}
-{{ toYaml .Values.controller.statsService.labels | indent 4 }}
+{{- if .Values.controller.service.labels }}
+{{ toYaml .Values.controller.service.labels | indent 4 }}
 {{- end }}
   annotations:
-{{- range $key, $value := .Values.controller.statsService.annotations }}
+{{- range $key, $value := .Values.controller.service.annotations }}
     {{ $key }}: {{ $value | quote }}
 {{- end }}
 spec:
-  {{ with .Values.controller.statsService.clusterIP }}clusterIP: {{ . }}{{ end }}
-  type: {{ .Values.controller.statsService.type }}
+  {{ with .Values.controller.service.clusterIP }}clusterIP: {{ . }}{{ end }}
+  type: {{ .Values.controller.service.type }}
   ports:
     - name: stat
       port: {{ .Values.controller.service.ports.stat }}
