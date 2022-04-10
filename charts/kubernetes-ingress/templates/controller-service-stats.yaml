@@ -45,4 +45,3 @@ spec:
     app.kubernetes.io/name: {{ template "kubernetes-ingress.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
-{{- end }}
