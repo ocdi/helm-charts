@@ -35,7 +35,6 @@ metadata:
 {{- end }}
 spec:
   {{ with .Values.controller.service.clusterIP }}clusterIP: {{ . }}{{ end }}
-  type: {{ .Values.controller.service.type }}
   ports:
     - name: stat
       port: {{ .Values.controller.service.ports.stat }}
