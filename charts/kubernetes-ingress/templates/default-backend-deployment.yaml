@@ -51,6 +51,13 @@ spec:
       topologySpreadConstraints:
         {{- toYaml . | nindent 8 }}
 {{- end }}
+{{- if .Values.defaultBackend.imageCredentials.registry }}
+      imagePullSecrets:
+      - name: {{ template "kubernetes-ingress.defaultBackend.fullname" . }}
+{{- else if .Values.defaultBackend.existingImagePullSecret }}
+      imagePullSecrets:
+      - name: {{ .Values.defaultBackend.existingImagePullSecret }}
+{{- end }}
 {{- if .Values.controller.priorityClassName }}
       priorityClassName: {{ .Values.controller.priorityClassName }}
 {{- end }}
@@ -58,6 +65,19 @@ spec:
         - name: {{ template "kubernetes-ingress.name" . }}-{{ .Values.defaultBackend.name }}
           image: "{{ .Values.defaultBackend.image.repository }}:{{ .Values.defaultBackend.image.tag }}"
           imagePullPolicy: {{ .Values.defaultBackend.image.pullPolicy }}
+          securityContext:
+            runAsUser: {{ .Values.defaultBackend.image.runAsUser }}
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
+            capabilities:
+              drop:
+                - ALL
+              add:
+                - NET_BIND_SERVICE
+            {{- if .Values.defaultBackend.enableRuntimeDefaultSeccompProfile }}
+            seccompProfile:
+              type: RuntimeDefault
+            {{- end }}
           ports:
             - name: http
               containerPort: {{ .Values.defaultBackend.containerPort }}

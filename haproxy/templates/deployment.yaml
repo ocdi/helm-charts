@@ -26,7 +26,8 @@ metadata:
 {{ toYaml .Values.podAnnotations | indent 4 }}
   {{- end }}
 spec:
-  {{- if not .Values.autoscaling.enabled }}
+  minReadySeconds: {{ .Values.minReadySeconds }}
+  {{- if and (not .Values.autoscaling.enabled) (not .Values.keda.enabled) }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
@@ -138,6 +139,10 @@ spec:
           {{- end }}
           {{- with .Values.startupProbe }}
           startupProbe:
+            {{- toYaml . | trim | nindent 12 }}
+          {{- end }}
+          {{- with .Values.extraEnvs }}
+          env:
             {{- toYaml . | trim | nindent 12 }}
           {{- end }}
           resources:

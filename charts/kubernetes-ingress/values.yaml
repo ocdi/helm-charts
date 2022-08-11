@@ -61,7 +61,11 @@ controller:
 
   ## Running container without root privileges
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
-  unprivileged: false
+  unprivileged: true
+
+  ## Restricts container syscalls
+  ## ref: https://kubernetes.io/docs/tutorials/security/seccomp/
+  enableRuntimeDefaultSeccompProfile: true
 
   ## Init Containers
   ## ref: https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
@@ -90,8 +94,8 @@ controller:
   ## Controller Container listener port configuration
   ## ref: https://kubernetes.io/docs/concepts/services-networking/connect-applications-service/
   containerPort:
-    http: 80
-    https: 443
+    http: 8080
+    https: 8443
     stat: 1024
 
   ## Controller Container liveness/readiness probe configuration
@@ -216,7 +220,7 @@ controller:
     restoreToOriginalReplicaCount: false
     scaledObject:
       annotations: {}
-    behaviour: {}
+    behavior: {}
     #  scaleDown:
     #    stabilizationWindowSeconds: 300
     #    policies:
@@ -482,9 +486,10 @@ controller:
     ## Specify the endpoints
     ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/master/Documentation/design.md#servicemonitor
     endpoints:
-    - port: stat
-      path: /metrics
-      scheme: http
+      - port: stat
+        path: /metrics
+        scheme: http
+        interval: 30s
 
 ## Default 404 backend
 defaultBackend:
@@ -497,6 +502,10 @@ defaultBackend:
     tag: 1.5
     pullPolicy: IfNotPresent
     runAsUser: 65534
+
+  ## Restricts container syscalls
+  ## ref: https://kubernetes.io/docs/tutorials/security/seccomp/
+  enableRuntimeDefaultSeccompProfile: true
 
   ## Compute Resources
   ## ref: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
@@ -530,6 +539,14 @@ defaultBackend:
     #     pods:
     #       metricName: haproxy_backend_current_sessions
     #       targetAverageValue: 2000
+
+  ## Private Registry configuration
+  ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+  imageCredentials:
+    registry: null
+    username: null
+    password: null
+  existingImagePullSecret: null
 
   ## Listener port configuration
   ## ref: https://kubernetes.io/docs/concepts/services-networking/connect-applications-service/
