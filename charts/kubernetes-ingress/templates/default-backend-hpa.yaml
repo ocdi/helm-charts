@@ -15,7 +15,13 @@ limitations under the License.
 */}}
 
 {{- if and .Values.defaultBackend.autoscaling.enabled .Values.defaultBackend.enabled }}
+{{- if .Capabilities.APIVersions.Has "autoscaling/v2" }}
+apiVersion: autoscaling/v2
+{{- else if .Capabilities.APIVersions.Has "autoscaling/v2beta2" }}
 apiVersion: autoscaling/v2beta2
+{{- else }}
+  {{- fail "ERROR: You must have autoscaling/v2 or autoscaling/v2beta2 to use HorizontalPodAutoscaler" }}
+{{- end }}
 kind: HorizontalPodAutoscaler
 metadata:
 {{- if .Values.defaultBackend.autoscaling.annotations }}
