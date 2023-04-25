@@ -1,5 +1,33 @@
 apiVersion: v1
 entries:
+  haproxy:
+  - annotations:
+      artifacthub.io/changes: |
+        - Update base image to HAProxy 2.6.9
+        - Update HPA API version (#172)
+        - Fix HPA spec (#173)
+        - Ensure api version capabilities of PodDisruptionBudget (#175)
+        - Add additionalPorts to service (#177)
+    apiVersion: v2
+    appVersion: 2.6.9
+    created: "2023-04-25T02:25:47.603668562Z"
+    description: A Helm chart for HAProxy on Kubernetes
+    digest: 941a568dfd010297716049d34a56d703b83cfccfd8d3f896b6c672b36d495b9f
+    home: https://github.com/haproxytech/helm-charts/tree/main/haproxy
+    icon: https://raw.githubusercontent.com/haproxytech/helm-charts/main/haproxy/chart-icon.png
+    keywords:
+    - haproxy
+    kubeVersion: '>=1.17.0-0'
+    maintainers:
+    - email: dkorunic@haproxy.com
+      name: Dinko Korunic
+    name: haproxy
+    sources:
+    - http://www.haproxy.org/
+    type: application
+    urls:
+    - https://github.com/ocdi/helm-charts/releases/download/haproxy-1.18.0/haproxy-1.18.0.tgz
+    version: 1.18.0
   kubernetes-ingress:
   - annotations:
       artifacthub.io/changes: |
@@ -254,6 +282,30 @@ entries:
     version: 10.17.11
   - annotations:
       artifacthub.io/changes: |
+        - Allow strategy override for Daemonset deployments (#186)
+    apiVersion: v2
+    appVersion: 1.10.1
+    created: "2023-04-25T02:25:47.725995037Z"
+    description: A Helm chart for HAProxy Kubernetes Ingress Controller
+    digest: 5b414aef7957aa3072dc23ba8bd826ad78b072b082f01e6f04821f36ef3a16ab
+    home: https://github.com/haproxytech/helm-charts/tree/main/kubernetes-ingress
+    icon: https://raw.githubusercontent.com/haproxytech/helm-charts/main/kubernetes-ingress/chart-icon.png
+    keywords:
+    - ingress
+    - haproxy
+    kubeVersion: '>=1.22.0-0'
+    maintainers:
+    - email: dkorunic@haproxy.com
+      name: Dinko Korunic
+    name: kubernetes-ingress
+    sources:
+    - https://github.com/haproxytech/kubernetes-ingress
+    type: application
+    urls:
+    - https://github.com/ocdi/helm-charts/releases/download/kubernetes-ingress-1.30.3/kubernetes-ingress-1.30.3.tgz
+    version: 1.30.3
+  - annotations:
+      artifacthub.io/changes: |
         - Use Ingress Controller 1.7.3 version for base image
     apiVersion: v2
     appVersion: 1.7.3
@@ -308,4 +360,4 @@ entries:
     urls:
     - https://github.com/ocdi/helm-charts/releases/download/kubernetes-ingress-1.17.11.2/kubernetes-ingress-1.17.11.2.tgz
     version: 1.17.11.2
-generated: "2021-12-12T00:22:59.185826248Z"
+generated: "2023-04-25T02:25:47.726030437Z"
