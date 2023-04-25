@@ -108,4 +108,4 @@ entries:
     - https://github.com/ocdi/helm-charts/releases/download/kubernetes-ingress-1.30.3/kubernetes-ingress-1.30.3.tgz
     version: 1.30.3
 
-generated: "2023-04-25T02:25:47.726030437Z"
+generated: "2023-04-25T02:31:47.726030437Z"
